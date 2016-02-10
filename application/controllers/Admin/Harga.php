@@ -2,7 +2,7 @@
 
 //validasi belum dikerjakan
 
-Class Mapel extends CI_Controller {
+Class Harga extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -38,18 +38,18 @@ Class Mapel extends CI_Controller {
         $this->load->view('include/footer');
     }
 
-    function edit() {
-        $IDMentor = $this->uri->segment(4);
-        $IDMapel = $this->uri->segment(5);
+    function edit($ID) {
         if ($input = $this->input->post()) {
+            $id_mentor = $input['id_mentor'];
+            $id_mapel = $input['id_mapel'];
             $harga = $input['harga'];
             $data = array(
-                'id_mentor' => $IDMentor,
-                'id_mapel' => $IDMapel,
+                'id_mentor' => $id_mentor,
+                'id_mapel' => $id_mapel,
                 'harga' => $harga,
             );
 
-            $this->Harga_Model->edit($ID, $data);
+            $this->Harga_Model->edit($ID,$data);
             redirect('/admin/harga');
         }
         $param['data'] = $this->Harga_Model->getById($ID)->row_array();

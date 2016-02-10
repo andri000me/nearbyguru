@@ -23,9 +23,6 @@
                 <td><?=$m['jenis_kelamin_mentor']?></td>
                 <td><?=$m['no_ponsel_mentor']?></td>
                 <td> 
-                    <button class="btn btn-primary btn-xs" onclick="window.location.href='<?=$this->config->base_url('/index.php/admin/mentor/view')?>/<?=$m['id_mentor']?>'">
-                        <i class="fa fa-pencil"> view</i>
-                    </button>
                     <button class="btn btn-primary btn-xs" onclick="window.location.href='<?=$this->config->base_url('/index.php/admin/mentor/edit')?>/<?=$m['id_mentor']?>'">
                         <i class="fa fa-pencil"> EDIT</i>
                     </button>

@@ -6,8 +6,8 @@ $(document).ready(function ()
         var instansi_pendidikan = $('#instansi_pendidikan').val();
         var data =
                 "<tr id='"+ instansi_pendidikan + "'>" +
-                "<td><input type='text' disabled='' name='jenjang_pendidikan[]' value='" + jenjang_pendidikan + "'/></td>" +
-                "<td><input type='text' disabled='' name='instansi_pendidikan[]' value='" + instansi_pendidikan + "'/></td>" +
+                "<td><input type='text' name='jenjang_pendidikan[]' value='" + jenjang_pendidikan + "'/></td>" +
+                "<td><input type='text' name='instansi_pendidikan[]' value='" + instansi_pendidikan + "'/></td>" +
                 "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
                 "</tr>"
                 ;
@@ -25,7 +25,7 @@ $(document).ready(function ()
         var nama_pengalaman = $('#nama_pengalaman').val();
         var data_pengalaman =
                 "<tr id='"+ nama_pengalaman + "'>" +
-                "<td><input type='text' disabled='' name='nama_pengalaman[]' value='" + nama_pengalaman + "'/></td>" +
+                "<td><input type='text'   name='nama_pengalaman[]' value='" + nama_pengalaman + "'/></td>" +
                 "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
                 "</tr>"
                 ;
@@ -44,8 +44,8 @@ $(document).ready(function ()
         var tambahan_kualifikasi = $('#tambahan_kualifikasi').val();
         var data_kualifikasi =
                 "<tr id='"+ nama_kualifikasi + "'>" +
-                "<td><input type='text' disabled='' name='nama_kualifikasi[]' value='" + nama_kualifikasi + "'/></td>" +
-                "<td><input type='text' disabled='' name='tambahan_kualifikasi[]' value='" + tambahan_kualifikasi + "'/></td>" +
+                "<td><input type='text'   name='nama_kualifikasi[]' value='" + nama_kualifikasi + "'/></td>" +
+                "<td><input type='text'   name='tambahan_kualifikasi[]' value='" + tambahan_kualifikasi + "'/></td>" +
                 "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
                 "</tr>"
                 ;
@@ -64,8 +64,8 @@ $(document).ready(function ()
         var waktu_ketersediaan = $('#waktu_ketersediaan').val();
         var data_jadwal =
                 "<tr id='"+ hari_ketersediaan + "'>" +
-                "<td><input type='text' disabled='' name='hari_ketersediaan[]' value='" + hari_ketersediaan + "'/></td>" +
-                "<td><input type='time' disabled='' name='waktu_ketersediaan[]' value='" + waktu_ketersediaan + "'/></td>" +
+                "<td><input type='text'   name='hari_ketersediaan[]' value='" + hari_ketersediaan + "'/></td>" +
+                "<td><input type='time'   name='waktu_ketersediaan[]' value='" + waktu_ketersediaan + "'/></td>" +
                 "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
                 "</tr>"
                 ;
@@ -76,6 +76,28 @@ $(document).ready(function ()
         }
         jumlah_baris_jadwal++;
         $('#jadwal tbody').attr('aria-data',jumlah_baris_jadwal);
+
+    });
+     $('#inputHargaMentor').click(function () {
+        var jumlah_baris_hargaMentor = $('#hargaMentor tbody').attr('aria-data');
+        var  tingkat_mapel= $('#tingkat_mapel').val();
+        var  nama_mapel= $('#nama_mapel').val();
+        var  harga= $('#harga').val();
+        var data =
+                "<tr id='"+ tingkat_mapel + "'>" +
+                "<td><input type='text' name='tingkat_mapel[]' value='" + tingkat_mapel + "'/></td>" +
+                "<td><input type='text' name='nama_mapel[]' value='" + nama_mapel + "'/></td>" +
+                "<td><input type='text' name='harga[]' value='" + harga + "'/></td>" +
+                "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
+                "</tr>"
+                ;
+        if (jumlah_baris_hargaMentor <= 0) {
+            $('#hargaMentor tbody').html(data);
+        } else {
+            $('#hargaMentor tbody').append(data);
+        }
+        jumlah_baris_hargaMentor++;
+        $('#hargaMentor tbody').attr('aria-data',jumlah_baris_hargaMentor);
 
     });
 });

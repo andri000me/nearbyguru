@@ -7,6 +7,7 @@ Class Mapel extends CI_Controller {
         parent::__construct();
         $this->load->model('Mapel_Model');
     }
+    
 
     public function index() {
         $param['data'] = $this->Mapel_Model->getAll()->result_array();
@@ -22,7 +23,6 @@ Class Mapel extends CI_Controller {
         if ($input = $this->input->post()) {
             $tingkat_mapel = $input['tingkat_mapel'];
             $nama_mapel = $input['nama_mapel'];
-
             $data = array(
                 'tingkat_mapel' => $tingkat_mapel,
                 'nama_mapel' => $nama_mapel,

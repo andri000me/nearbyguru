@@ -362,8 +362,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-8">
-                    <button type="submit" class="member btn btn-success" name="btn_submit"><i class="fa fa-check"></i> Simpan </button>
-                                            <!-- <input type='submit' name='btn_submit' /> -->
+                    <button type="submit" class="member btn btn-success" name="btn_submit"><i class="fa fa-check"></i> Simpan </button>]
                 </div>
             </div>
         </form>
