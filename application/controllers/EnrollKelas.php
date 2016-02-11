@@ -16,7 +16,12 @@ Class EnrollKelas extends CI_Controller { //butuh id_siswa
         $this->load->view('include/header', $param);
         $this->load->view('cari-kelas', $param);
         $this->load->view('include/footer');
-
+    }
+    public function addKelas(){
+        $IDSiswa = $this->uri->segment(3);
+        $IDHarga= $this->uri->segment(4);
+        $this->Enroll_Model->addKelas($IDSiswa, $IDHarga);
+        redirect('/homesiswa', 'refresh');
     }
 }
 ?>

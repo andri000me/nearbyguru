@@ -1,7 +1,6 @@
 <?php
-if (isset($id_siswa)) {
-     $id_siswa = $id_siswa['id_siswa'];
-}
+
+echo 'id siswa' . $id_siswa;
 ?>
 <h3><i class="fa fa-search"></i><i class="fa fa-building"></i> Daftar Course Tersedia </h3>
 <div class="col-lg-12">
@@ -14,11 +13,12 @@ if (isset($id_siswa)) {
                                 </div>
                                 <i class="fa fa-3x fa-university"></i> <br><br>
                                 <p>
+                                      <?= $m['id_harga'] ?><br>
                                 <?= $m['tingkat_mapel'] ?><br>
                                 <?= $m['nama_mapel'] ?><br>
                                 <?= $m['harga'] ?><br>
                                 </p>
-                                <button type="button" class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/enrollkelas/addKelas') ?>/<?= $id_siswa ?>'">
+                                <button type="button" class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/enrollkelas/addKelas') ?>/<?= $id_siswa ?>/<?= $m['id_harga'] ?>'">
                                         <i class="fa fa-check-circle ">
                                             ENROLL
                                         </i>

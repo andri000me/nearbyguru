@@ -14,5 +14,12 @@ Class Enroll_Model extends CI_MODEL {
                 ' order by harga.id_harga ');
         return $q;
     }
+    public function addKelas($idSiswa, $idHarga) {
+        $data = array(
+            'id_siswa' => $idSiswa,
+            'id_harga' => $idHarga
+        );
+        $this->db->insert('kelas', $data);
+    }
 
 }
