@@ -6,20 +6,21 @@ Class HomeMentor extends CI_Controller {
         parent::__construct();
         $this->load->model('Mentor_Model');
         $this->load->model('Harga_Model');
+        $this->load->model('Kelas_Model');
     }
 
     public function index() {
-        $ID = 1;
+        $ID = 1; //untuk uji coba id mentor 1 
         $param['asal'] = "coba";
 
-        $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //edit profil utama, edit data banyak nanti aja
+        $param['data'] = $this->Mentor_Model->getById($ID)->row_array();//ambil data profil utama
         $param['dataSejarah'] = $this->Mentor_Model->getSejarah($ID)->result_array();
         $param['dataPengalaman'] = $this->Mentor_Model->getPengalaman($ID)->result_array();
         $param['dataKualifikasi'] = $this->Mentor_Model->getKualifikasi($ID)->result_array();
         $param['dataJadwal'] = $this->Mentor_Model->getJadwal($ID)->result_array();
 
         $param['dataHarga'] = $this->Harga_Model->getHargaMentor($ID)->result_array();
-        // $param['dataKelas'] = $this->Kelas_Model->getKelasMentor($ID)->result_array();
+        $param['dataKelas'] = $this->Kelas_Model->getKelasByIdMentor($ID)->result_array();
         //buat include template
         $this->load->view('include/header', $param);
         $this->load->view('homementor', $param);
@@ -51,6 +52,25 @@ Class HomeMentor extends CI_Controller {
         $this->load->view('include/header');
         $this->load->view('edit-harga-mentor', $param);
         $this->load->view('include/footer');
+    }
+    public function deleteHarga() {
+        $IDMentor = $this->uri->segment(3);
+        $IDHarga= $this->uri->segment(4);
+        $this->Harga_Model->delete($IDHarga);
+        redirect('/homementor/editHarga/'.$IDMentor, 'refresh');
+    }
+    public function editKelasByMentor($ID) {
+        $param['dataKelas'] = $this->Kelas_Model->getKelasByIdMentor($ID)->result_array();
+        $this->load->view('include/header');
+        $this->load->view('edit-kelas-mentor', $param);
+        $this->load->view('include/footer');
+    }
+    public function deleteKelasByMentor() {
+        $IDMentor = $this->uri->segment(3);
+        $IDKelas= $this->uri->segment(4);
+        $this->Kelas_Model->delete($IDKelas);
+        redirect('/homementor/editKelasByMentor/'.$IDMentor, 'refresh');
+        
     }
 
 }

@@ -22,7 +22,7 @@
                     <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
                 </div>
                 <!--logo start-->
-                <a href="<?= $this->config->base_url('/index.php/') ?>" class="logo"><b>PROJEK NEARBY GURU</b></a>
+                <a href="<?= $this->config->base_url('/index.php/') ?>" class="logo"><i class="fa fa-graduation-cap"></i> PROJEK NEARBY GURU</a>
                 <!--logo end-->
                 <div class="nav notify-row" id="top_menu">
 
@@ -64,7 +64,7 @@
                                 echo "class='active'";
                             }
                             ?> href="javascript:;" >
-                                <i class="fa fa-desktop"></i>
+                                <i class="fa fa-book"></i>
                                 <span>Data Master</span>
                             </a>
                             <ul class="sub">
@@ -80,7 +80,7 @@
                                 echo "class='active'";
                             }
                             ?> href="javascript:;" >
-                                <i class="fa fa-desktop"></i>
+                                <i class="fa fa-building-o"></i>
                                 <span>Kelas</span>
                             </a>
                             <ul class="sub">  
@@ -100,6 +100,8 @@
                             </a>
                             <ul class="sub">  
                                 <li><a   href="<?= $this->config->base_url('/index.php/homementor') ?>">Home Mentor</a></li>
+                                <li><a   href="<?= $this->config->base_url('/index.php/homesiswa') ?>">Home Siswa</a></li>
+                                <li><a   href="<?= $this->config->base_url('/index.php/enrollkelas') ?>">Tampilan Kelas di User</a></li>
                             </ul>
                         </li>
                         <!------------------------------------------------------------------------------------------------------------------------------->

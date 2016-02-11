@@ -26,7 +26,7 @@ Class Harga_Model extends CI_MODEL {
     }
 
     public function getHargaMentor($ID) {
-        return $this->db->query('select harga.harga, mata_pelajaran.nama_mapel, mata_pelajaran.tingkat_mapel from harga,mata_pelajaran where ' . $ID . ' = harga.id_mentor and harga.id_mapel = mata_pelajaran.id_mapel');
+        return $this->db->query('select harga.id_harga,harga.id_mentor,harga.harga, mata_pelajaran.nama_mapel, mata_pelajaran.tingkat_mapel from harga,mata_pelajaran where ' . $ID . ' = harga.id_mentor and harga.id_mapel = mata_pelajaran.id_mapel');
     }
 
     public function insertHargaMentor($data, $ID) { //error ambil hasil id_mapelnya

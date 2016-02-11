@@ -20,7 +20,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
 
 
 <div class="row mt">
-    <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="showback">
             <table cellpadding="2">
                 <tr>
@@ -64,37 +64,6 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <td style="width: 20px;"> : </td>
                     <td><?php echo $alamat_mentor; ?></td>
                 </tr>
-            </table>
-        </div>
-        <div class="showback">
-            <table>
-                <tr>
-                    <td style="width: 200px;"><h4><i class="fa fa-angle-right"></i> Informasi Kursus</h4></td>
-                    <td></td>
-                    <td ><button class="btn btn-primary btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editHarga') ?>/<?= $id_mentor ?>'">
-                            <i class="fa fa-pencil"> EDIT</i>
-                        </button></td>
-                </tr>
-                <tr>
-                <table class="table table-striped table-advance table-hover">
-                    <thead>
-                        <tr>
-                            <th>Tingkat</th>
-                            <th>Mata Pelajaran</th>
-                            <th> Harga </th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                            <?php foreach ($dataHarga as $m) { ?>
-                            <tr>
-                                <td><?= $m['tingkat_mapel'] ?></td>
-                                <td><?= $m['nama_mapel'] ?></td>
-                                <td><?= $m['harga'] ?></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </tr>
                 <tr>
                     <td colspan="3"><h4><i class="fa fa-angle-right"></i> Jadwal Ketersediaan Mengajar</h4></td>
                 </tr>
@@ -115,20 +84,58 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <?php } ?>
                         </tbody>
                 </table>
+            </table>
+        </div>
+        <div class="showback">
+            <table>
+                <tr>
+                    <td style="width: 200px;"><h4><i class="fa fa-angle-right"></i> Informasi Kursus</h4></td>
+                    <td></td>
+                    <td ><button class="btn btn-primary btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editHarga') ?>/<?= $id_mentor ?>'">
+                            <i class="fa fa-pencil"> EDIT</i>
+                        </button></td>
+                </tr>
+                <tr>
+                <table class="table table-striped table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tingkat</th>
+                            <th>Mata Pelajaran</th>
+                            <th> Harga </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($dataHarga as $m) { ?>
+                            <tr>
+                                <td><?= $m['tingkat_mapel'] ?></td>
+                                <td><?= $m['nama_mapel'] ?></td>
+                                <td><?= $m['harga'] ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
                 </tr>
             </table>
         </div>
         <div class="showback">
-           <!-- <table>
+            <table cellpadding="3"> 
                 <tr>
-                    <td colspan="4"><h4><i class="fa fa-angle-right"></i> Kelas Aktif (diambil sama siswa, otomatis aktif)</h4></td>
+                    <td style="width: 500px;"><h4><i class="fa fa-angle-right"></i> Kelas Aktif (diambil sama siswa, otomatis aktif)</h4></td>
+                    <td></td>
+                    <td><button class="btn btn-theme03 btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editKelasByMentor') ?>/<?= $id_mentor?>'">
+                            <i class="fa fa-pencil"> EDIT KELAS</i>
+                        </button></td>
                 </tr>
                 <tr>
-                     <table class="table table-striped table-advance table-hover">
+                <table class="table table-striped table-advance table-hover">
                     <thead>
                         <tr>
-                            <th> Nama Siswa </th>
+                            <th> Tingkat </th>
                             <th> Mata Pelajaran </th>
+                            <th> Nama Siswa </th>
+                            <th> Alamat Siswa </th>
+                            <th> No. Ponsel Siswa </th>
+                            <th> Biaya per Jam </th>
                             <th> Waktu Masuk </th>
                             <th> Waktu Keluar </th>
                         </tr>
@@ -136,8 +143,12 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <?php foreach ($dataKelas as $m) { ?>
                         <tbody>
                             <tr>
-                                <td><?= $m['nama_siswa'] ?></td>
+                                <td><?= $m['tingkat_mapel'] ?></td>
                                 <td><?= $m['nama_mapel'] ?></td>
+                                <td><?= $m['nama_siswa'] ?></td>
+                                <td><?= $m['alamat_siswa'] ?></td>
+                                <td><?= $m['no_ponsel_siswa'] ?></td>
+                                <td><?= $m['harga'] ?></td>
                                 <td><?= $m['waktu_masuk'] ?></td>
                                 <td><?= $m['waktu_keluar'] ?></td>
                             </tr>
@@ -145,7 +156,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <?php } ?>
                 </table>
                 </tr>
-            </table>-->
+            </table>
         </div>
     </div>
 </div>

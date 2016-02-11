@@ -42,6 +42,7 @@
                         <th>Tingkat</th>
                         <th>Mata Pelajaran</th>
                         <th>Harga</th>
+                        <th colspan="2"> Action </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,12 @@
                             <td><?= $m['tingkat_mapel'] ?></td>
                             <td><?= $m['nama_mapel'] ?></td>
                             <td><?= $m['harga'] ?></td>
+                            <td> <button type="button" class="btn btn-danger btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/deleteHarga') ?>/<?= $m['id_mentor'] ?>/<?= $m['id_harga'] ?>'">
+                                        <i class="fa fa-trash-o ">
+                                            HAPUS 
+                                        </i>
+                                    </button>
+                                </td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -3,18 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/projek/application/views/detail-mentor.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/controllers/HomeMentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/homesiswa.php</file>
             <file>file:/E:/xampp/htdocs/projek/assets/js/main.js</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/homementor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/controllers/EnrollKelas.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/tabel-mentor.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/models/Mentor_Model.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/models/Kelas_Model.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/views/detail-kelas.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/views/include/header.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/controllers/Admin/Kelas.php</file>
-            <file>file:/E:/xampp/htdocs/projek/application/views/tabel-kelas.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/edit-kelas-mentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/edit-harga-mentor.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/controllers/Admin/Mentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/detail-mentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/cari-kelas.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/controllers/HomeMentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/controllers/HomeSiswa.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/models/Mentor_Model.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/views/include/header.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/models/Enroll_Model.php</file>
         </group>
     </open-files>
 </project-private>
