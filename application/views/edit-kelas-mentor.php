@@ -14,7 +14,7 @@
                     <th> Biaya per Jam </th>
                     <th> Waktu Masuk </th>
                     <th> Waktu Keluar </th>
-                    <th></th>
+                    <th colspan="2"></th>
                 </tr>
             </thead>
             <?php foreach ($dataKelas as $m) { ?>
@@ -28,12 +28,19 @@
                         <td><?= $m['harga'] ?></td>
                         <td><?= $m['waktu_masuk'] ?></td>
                         <td><?= $m['waktu_keluar'] ?></td>
+                        <td> <button type="button" class="btn btn-theme btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editJadwalKelas') ?>/<?= $m['id_mentor'] ?>/<?= $m['id_kelas'] ?>'">
+                                <i class="fa fa-hourglass-half ">
+                                    Ubah waktu
+                                </i>
+                            </button>
+                        </td>
                         <td> <button type="button" class="btn btn-danger btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/deleteKelasByMentor') ?>/<?= $m['id_mentor'] ?>/<?= $m['id_kelas'] ?>'">
                                 <i class="fa fa-trash-o ">
                                     Selesai
                                 </i>
                             </button>
                         </td>
+                         
                     </tr>
                 </tbody>
             <?php } ?>

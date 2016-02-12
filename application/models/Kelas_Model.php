@@ -34,10 +34,10 @@ Class Kelas_Model extends CI_MODEL {
                 ' harga.harga as harga, ' .
                 ' kelas.waktu_masuk as waktu_masuk, ' .
                 ' kelas.waktu_keluar as waktu_keluar, ' .
-                ' kelas.id_kelas as id_kelas, '.
+                ' kelas.id_kelas as id_kelas, ' .
                 ' kelas.id_siswa as id_siswa, ' .
-                ' harga.id_harga as id_harga, '.
-                ' mentor.id_mentor as id_mentor '.
+                ' harga.id_harga as id_harga, ' .
+                ' mentor.id_mentor as id_mentor ' .
                 ' from kelas, harga, mentor, mata_pelajaran ' .
                 ' where kelas.id_siswa = ' . $ID .
                 ' and harga.id_harga = kelas.id_harga ' .
@@ -55,12 +55,34 @@ Class Kelas_Model extends CI_MODEL {
                 ' harga.harga as harga, ' .
                 ' kelas.waktu_masuk as waktu_masuk, ' .
                 ' kelas.waktu_keluar as waktu_keluar, ' .
-                ' kelas.id_kelas as id_kelas, '.
-                ' harga.id_mentor as id_mentor, '.
-                ' kelas.id_harga as id_harga, '.
-                ' siswa.id_siswa as id_siswa '.
+                ' kelas.id_kelas as id_kelas, ' .
+                ' harga.id_mentor as id_mentor, ' .
+                ' kelas.id_harga as id_harga, ' .
+                ' siswa.id_siswa as id_siswa ' .
                 ' from harga, kelas, mata_pelajaran, siswa ' .
                 ' where harga.id_mentor = ' . $ID .
+                ' and kelas.id_harga = harga.id_harga ' .
+                ' and mata_pelajaran.id_mapel = harga.id_mapel ' .
+                ' and siswa.id_siswa = kelas.id_siswa ');
+        return $q;
+    }
+
+    public function getKelasByIdMentorandIDKelas($IDMentor, $IDKelas) {
+        $q = $this->db->query('select mata_pelajaran.tingkat_mapel as tingkat_mapel, ' .
+                ' mata_pelajaran.nama_mapel as nama_mapel, ' .
+                ' siswa.nama_siswa as nama_siswa, ' .
+                ' siswa.alamat_siswa as alamat_siswa, ' .
+                ' siswa.no_ponsel_siswa as no_ponsel_siswa, ' .
+                ' harga.harga as harga, ' .
+                ' kelas.waktu_masuk as waktu_masuk, ' .
+                ' kelas.waktu_keluar as waktu_keluar, ' .
+                ' kelas.id_kelas as id_kelas, ' .
+                ' harga.id_mentor as id_mentor, ' .
+                ' kelas.id_harga as id_harga, ' .
+                ' siswa.id_siswa as id_siswa ' .
+                ' from harga, kelas, mata_pelajaran, siswa ' .
+                ' where harga.id_mentor = ' . $IDMentor .
+                ' and kelas.id_kelas = ' . $IDKelas .
                 ' and kelas.id_harga = harga.id_harga ' .
                 ' and mata_pelajaran.id_mapel = harga.id_mapel ' .
                 ' and siswa.id_siswa = kelas.id_siswa ');
