@@ -30,13 +30,15 @@
 
 <script type="text/javascript" src='<?= $this->config->base_url("assets/js/gritter/js/jquery.gritter.js") ?>'></script>
 <script type="text/javascript" src='<?= $this->config->base_url("assets/js/gritter-conf.js") ?>'></script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker3').datetimepicker({
-            format: 'LT'
-        });
-    });
+<script>
+function doconfirm()
+{
+    job=confirm("Are you sure to delete permanently?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
 </script>
 
 

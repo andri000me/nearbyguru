@@ -8,13 +8,13 @@
 		
 		public function insert($data)
 		{
-			$this->db->insert('mata_pelajaran', $data);
+			return $this->db->insert('mata_pelajaran', $data);
 		}
                 
                 public function delete($ID)
 		{
 			$this->db->where('id_mapel', $ID);
-			$this->db->delete('mata_pelajaran');
+			return $this->db->delete('mata_pelajaran');
 		}
 		public function getById($ID)
 		{
@@ -23,7 +23,7 @@
 		public function edit($ID, $data)
 		{
 			$this->db->where('id_mapel', $ID);
-			$this->db->update('mata_pelajaran', $data);
+			return $this->db->update('mata_pelajaran', $data);
 		}
 	}
 ?>

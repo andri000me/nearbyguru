@@ -7,6 +7,7 @@ Class HomeMentor extends CI_Controller {
         $this->load->model('Mentor_Model');
         $this->load->model('Harga_Model');
         $this->load->model('Kelas_Model');
+        $this->load->library('form_validation');
     }
 
     public function index() {
@@ -30,7 +31,6 @@ Class HomeMentor extends CI_Controller {
 
     public function editHarga($ID) {
         if ($input = $this->input->post()) {
-
             $tingkat_mapel = $this->input->post('tingkat_mapel');
             $nama_mapel = $this->input->post('nama_mapel');
             $harga = $this->input->post('harga');
@@ -57,7 +57,8 @@ Class HomeMentor extends CI_Controller {
     public function deleteHarga() {
         $IDMentor = $this->uri->segment(3);
         $IDHarga = $this->uri->segment(4);
-        $this->Harga_Model->delete($IDHarga);
+        $result = $this->Harga_Model->delete($IDHarga);
+        echo json_encode($result);
         redirect('/homementor/editHarga/' . $IDMentor, 'refresh');
     }
 
@@ -71,14 +72,18 @@ Class HomeMentor extends CI_Controller {
     public function deleteKelasByMentor() {
         $IDMentor = $this->uri->segment(3);
         $IDKelas = $this->uri->segment(4);
-        $this->Kelas_Model->delete($IDKelas);
+        $result = $this->Kelas_Model->delete($IDKelas);
+        echo json_encode($result);
         redirect('/homementor/editKelasByMentor/' . $IDMentor, 'refresh');
     }
 
     public function editJadwalKelas() {
         $IDMentor = $this->uri->segment(3);
         $IDKelas = $this->uri->segment(4);
-        
+
+        $this->form_validation->set_rules('waktu_masuk', 'Waktu Masuk', 'required');
+        $this->form_validation->set_rules('waktu_keluar', 'Waktu Keluar', 'required');
+
         if ($input = $this->input->post()) {
             $waktu_masuk = $input['waktu_masuk'];
             $waktu_keluar = $input['waktu_keluar'];
@@ -87,12 +92,14 @@ Class HomeMentor extends CI_Controller {
                 'waktu_masuk' => $waktu_masuk,
                 'waktu_keluar' => $waktu_keluar,
             );
-
-            $this->Kelas_Model->edit($IDKelas, $data);
-            redirect('/homementor/editKelasByMentor/' . $IDMentor, 'refresh');
+            if ($this->form_validation->run() == TRUE) {
+                $result = $this->Kelas_Model->edit($IDKelas, $data);
+                echo json_encode($result);
+                redirect('/homementor/editKelasByMentor/' . $IDMentor, 'refresh');
+            }
         }
         $param['data'] = $this->Kelas_Model->getById($IDKelas)->row_array();
-        $param['dataKelas'] = $this->Kelas_Model->getKelasByIdMentorandIDKelas($IDMentor,$IDKelas)->row_array();
+        $param['dataKelas'] = $this->Kelas_Model->getKelasByIdMentorandIDKelas($IDMentor, $IDKelas)->row_array();
         $param['id_mentor'] = $IDMentor;
         $this->load->view('include/header');
         $this->load->view('detail-kelas-mentor', $param);

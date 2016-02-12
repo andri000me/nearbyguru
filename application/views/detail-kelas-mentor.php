@@ -15,6 +15,11 @@ if (isset($dataKelas)) { //--- saat melakukan edit ambil data yang dikirim di co
 //--------FORM-------//
 ?>
 <h3><i class="fa fa-clock-o"></i> Jadwal Kelas</h3>
+<?php
+if (validation_errors() == TRUE) {
+    ?>
+    <div class="alert alert-danger"><?php echo validation_errors(); ?></div>
+<?php } ?>
 <div class="row mt">
     <div class="col-md-2 col-sm-2 mb">
     <div class="green-panel">

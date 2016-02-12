@@ -23,11 +23,8 @@
                     <button class="btn btn-primary btn-xs" onclick="window.location.href='<?=$this->config->base_url('/index.php/admin/mapel/edit')?>/<?=$m['id_mapel']?>'">
                         <i class="fa fa-pencil"> VIEW and EDIT</i>
                     </button>
-                <button class="btn btn-danger btn-xs" onclick="window.location.href='<?=$this->config->base_url('/index.php/admin/mapel/delete')?>/<?=$m['id_mapel']?>'">
-                    <i class="fa fa-trash-o ">
-                       HAPUS 
-                    </i>
-                </button>
+                    <a class="btn btn-danger btn-xs" onclick="return doconfirm();" href="<?=$this->config->base_url('/index.php/admin/mapel/delete')?>/<?=$m['id_mapel']?>"><i class="fa fa-trash-o "></i>HAPUS</a>
+                
                 </td>
 	</tr>
     </tbody>

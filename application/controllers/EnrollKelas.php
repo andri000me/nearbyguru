@@ -5,6 +5,7 @@ Class EnrollKelas extends CI_Controller { //butuh id_siswa
     public function __construct() {
         parent::__construct();
         $this->load->model('Enroll_Model');
+        $this->load->library('form_validation');
     }
     public function index() {
         $ID=1;//untuk uji coba id_siswa

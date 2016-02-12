@@ -31,6 +31,11 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
 ?>
 
 <h3><i class="fa fa-angle-right"></i>Siswa</h3>
+<?php
+if (validation_errors() == TRUE) {
+    ?>
+    <div class="alert alert-danger"><?php echo validation_errors(); ?></div>
+<?php } ?>
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">
@@ -52,7 +57,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Jenis Kelamin :</label>
                     <div class="col-sm-10">
-                        <!--<input value='<?= $jenis_kelamin_siswa ?>' type='text' name='jenis_kelamin_siswa' class="form-control">-->
+                        <!--<input value='<?= $jenis_kelamin_siswa ?>' type='text' name='jenis_kelamin_siswa' class="form-control"> ERROR DB KALAU KOSONG-->
                         <input type="radio" name="jenis_kelamin_siswa" value="L" <?php if ($jenis_kelamin_siswa == 'L') echo 'checked="checked"'; ?>> Laki-laki
                         <input type="radio" name="jenis_kelamin_siswa" value="P" <?php if ($jenis_kelamin_siswa == 'P') echo 'checked="checked"'; ?>> Perempuan    
                     </div>

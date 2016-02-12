@@ -8,12 +8,12 @@ Class Harga_Model extends CI_MODEL {
     }
 
     public function insert($data) {
-        $this->db->insert('harga', $data);
+        return $this->db->insert('harga', $data);
     }
 
     public function delete($ID) {
         $this->db->where('id_harga', $ID);
-        $this->db->delete('harga');
+        return $this->db->delete('harga');
     }
 
     public function getById($ID) {
@@ -22,7 +22,7 @@ Class Harga_Model extends CI_MODEL {
 
     public function edit($ID, $data) {
         $this->db->where('id_harga', $ID);
-        $this->db->update('harga', $data);
+        return $this->db->update('harga', $data);
     }
 
     public function getHargaMentor($ID) {
@@ -42,7 +42,7 @@ Class Harga_Model extends CI_MODEL {
             'id_mapel' => $q,
             'harga' => $data['harga'],
         );
-        $this->db->insert('harga', $data);
+        return $this->db->insert('harga', $data);
     }
 
 }

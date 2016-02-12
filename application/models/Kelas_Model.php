@@ -8,12 +8,12 @@ Class Kelas_Model extends CI_MODEL {
     }
 
     public function insert($data) {
-        $this->db->insert('kelas', $data);
+        return $this->db->insert('kelas', $data);
     }
 
     public function delete($ID) {
         $this->db->where('id_kelas', $ID);
-        $this->db->delete('kelas');
+        return $this->db->delete('kelas');
     }
 
     public function getById($ID) {
@@ -22,7 +22,7 @@ Class Kelas_Model extends CI_MODEL {
 
     public function edit($ID, $data) {
         $this->db->where('id_kelas', $ID);
-        $this->db->update('kelas', $data);
+        return $this->db->update('kelas', $data);
     }
 
     public function getKelasByIdSiswa($ID) {

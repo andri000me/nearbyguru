@@ -8,7 +8,7 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
     }
 
     public function insert($data) {
-        $this->db->insert('mentor', $data);
+        return $this->db->insert('mentor', $data);
     }
     public function lastInsert(){
         $this->db->select_max('id_mentor');
@@ -18,16 +18,16 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
 
     public function delete($ID) {
         $this->db->where('id_mentor', $ID);
-        $this->db->delete('mentor');
+        return $this->db->delete('mentor');
     }
 
     public function edit($ID, $data) {
         $this->db->where('id_mentor', $ID);
-        $this->db->update('mentor', $data);
+        return $this->db->update('mentor', $data);
     }
 
     public function insertSejarah($data) {
-        $this->db->insert('sejarah_pendidikan', $data);
+        return $this->db->insert('sejarah_pendidikan', $data);
     }
 
     public function getSejarah($ID) {
@@ -37,11 +37,11 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
 
     public function deleteSejarah($ID) {
         $this->db->where('id_pendidikan', $ID);
-        $this->db->delete('sejarah_pendidikan');
+        return $this->db->delete('sejarah_pendidikan');
     }
 
     public function insertPengalaman($data) {
-        $this->db->insert('pengalaman_mengajar', $data);
+        return $this->db->insert('pengalaman_mengajar', $data);
     }
 
     public function getPengalaman($ID) {
@@ -51,11 +51,11 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
 
     public function deletePengalaman($ID) {
         $this->db->where('id_pengalaman', $ID);
-        $this->db->delete('pengalaman_mengajar');
+        return $this->db->delete('pengalaman_mengajar');
     }
 
     public function insertKualifikasi($data) {
-        $this->db->insert('kualifikasi', $data);
+        return $this->db->insert('kualifikasi', $data);
     }
 
     public function getKualifikasi($ID) {
@@ -65,11 +65,11 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
 
     public function deleteKualifikasi($ID) {
         $this->db->where('id_kualifikasi', $ID);
-        $this->db->delete('kualifikasi');
+        return $this->db->delete('kualifikasi');
     }
 
     public function insertJadwal($data) {
-        $this->db->insert('jadwal_ketersediaan_mengajar', $data);
+        return $this->db->insert('jadwal_ketersediaan_mengajar', $data);
     }
 
     public function getJadwal($ID) {
@@ -79,7 +79,7 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
 
     public function deleteJadwal($ID) {
         $this->db->where('id_jadwal_ketersediaan', $ID);
-        $this->db->delete('jadwal_ketersediaan_mengajar');
+        return $this->db->delete('jadwal_ketersediaan_mengajar');
     }
 
     public function getById($ID) {

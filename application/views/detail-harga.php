@@ -13,6 +13,11 @@ $harga = $data['harga'];
 //--------FORM-------//
 ?>
 <h3><i class="fa fa-angle-right"></i>Harga Kursus</h3>
+<?php
+if (validation_errors() == TRUE) {
+    ?>
+    <div class="alert alert-danger"><?php echo validation_errors(); ?></div>
+<?php } ?>
 <div class="row mt">
     <div class="col-lg-12">
         <div class="form-panel">

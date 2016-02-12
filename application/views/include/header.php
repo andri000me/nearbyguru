@@ -52,7 +52,7 @@
                             if (!isset($asal)) {
                                 echo "class='active'";
                             }
-                            ?> href="<?= $this->config->base_url('/index.php/admin/dasboard') ?>">
+                            ?> href="<?= $this->config->base_url('/index.php/admin/dashboard') ?>">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Beranda</span>
                             </a>

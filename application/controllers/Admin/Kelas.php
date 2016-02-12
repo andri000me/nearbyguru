@@ -8,6 +8,7 @@ Class Kelas extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Kelas_Model');
+        $this->load->library('form_validation');
     }
 
     public function index() {
@@ -21,6 +22,8 @@ Class Kelas extends CI_Controller {
     }
 
     public function input() {
+        $this->form_validation->set_rules('id_siswa', 'ID Siswa', 'required');
+        $this->form_validation->set_rules('id_harga', 'ID Harga', 'required');
         if ($input = $this->input->post()) {
             $id_siswa = $input['id_siswa'];
             $id_harga = $input['id_harga'];
@@ -33,9 +36,11 @@ Class Kelas extends CI_Controller {
                 'waktu_masuk' => $waktu_masuk,
                 'waktu_keluar' => $waktu_keluar,
             );
-
-            $this->Kelas_Model->insert($data);
+            if ($this->form_validation->run() == TRUE) {
+            $result = $this->Kelas_Model->insert($data);
+            echo json_encode($result);
             redirect('/admin/kelas');
+            }
         }
         $this->load->view('include/header');
         $this->load->view('detail-kelas');
@@ -56,17 +61,20 @@ Class Kelas extends CI_Controller {
                 'waktu_keluar' => $waktu_keluar,
             );
 
-            $this->Kelas_Model->edit($ID, $data);
+            $result = $this->Kelas_Model->edit($ID, $data);
+            echo json_encode($result);
             redirect('/admin/kelas');
         }
         $param['data'] = $this->Kelas_Model->getById($ID)->row_array();
+        echo json_encode($param['data']);
         $this->load->view('include/header');
         $this->load->view('detail-kelas', $param);
         $this->load->view('include/footer');
     }
 
     public function delete($ID) {
-        $this->Kelas_Model->delete($ID);
+        $result = $this->Kelas_Model->delete($ID);
+        echo json_encode($result);
         redirect('/admin/kelas');
     }
 

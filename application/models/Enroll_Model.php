@@ -19,7 +19,7 @@ Class Enroll_Model extends CI_MODEL {
             'id_siswa' => $idSiswa,
             'id_harga' => $idHarga
         );
-        $this->db->insert('kelas', $data);
+        return $this->db->insert('kelas', $data);
     }
 
 }

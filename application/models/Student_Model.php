@@ -8,13 +8,13 @@
 		
 		public function insert($data)
 		{
-			$this->db->insert('siswa', $data);
+			return $this->db->insert('siswa', $data);
 		}
                 
                 public function delete($ID)
 		{
 			$this->db->where('id_siswa', $ID);
-			$this->db->delete('siswa');
+			return $this->db->delete('siswa');
 		}
 		public function getById($ID)
 		{
@@ -23,7 +23,7 @@
 		public function edit($ID, $data)
 		{
 			$this->db->where('id_siswa', $ID);
-			$this->db->update('siswa', $data);
+			return $this->db->update('siswa', $data);
 		}
 	}
 ?>

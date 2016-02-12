@@ -7,6 +7,7 @@ Class HomeSiswa extends CI_Controller {
         $this->load->model('Student_Model');
         $this->load->model('Kelas_Model');
         $this->load->model('Harga_Model');
+        $this->load->library('form_validation');
     }
     public function index() {
         $ID=1;//untuk uji coba id_siswa

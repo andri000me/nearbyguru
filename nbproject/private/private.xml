@@ -8,7 +8,9 @@
             <file>file:/E:/xampp/htdocs/projek/application/views/homementor.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/controllers/EnrollKelas.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/tabel-mentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/models/Kelas_Model.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/edit-kelas-mentor.php</file>
+            <file>file:/E:/xampp/htdocs/projek/application/controllers/Admin/Kelas.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/edit-harga-mentor.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/controllers/Admin/Mentor.php</file>
             <file>file:/E:/xampp/htdocs/projek/application/views/detail-mentor.php</file>

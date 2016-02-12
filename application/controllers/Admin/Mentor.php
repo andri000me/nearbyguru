@@ -5,6 +5,7 @@ Class Mentor extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Mentor_Model');
+        $this->load->library('form_validation');
     }
 
     public function index() {
@@ -19,6 +20,13 @@ Class Mentor extends CI_Controller {
     }
 
     function input() {
+
+        $this->form_validation->set_rules('nama_mentor', 'Nama Mentor', 'required');
+        $this->form_validation->set_rules('no_ponsel_mentor', 'Nomor Ponsel', 'required');
+        $this->form_validation->set_rules('alamat_mentor', 'Alamat', 'required');
+        $this->form_validation->set_rules('email_mentor', 'Email', 'required');
+        $this->form_validation->set_rules('password_mentor', 'Password', 'required');
+
         if ($input = $this->input->post()) {
             $nama_mentor = $input['nama_mentor'];
             $no_identitas_mentor = $input['no_identitas_mentor'];
@@ -31,7 +39,7 @@ Class Mentor extends CI_Controller {
 
             $latitude_mentor = $input['latitude_mentor'];
             $longitude_mentor = $input['longitude_mentor'];
-
+            $alamat_mentor = $input ['alamat_mentor'];
 
             $pekerjaan_mentor = $input ['pekerjaan_mentor'];
             $bio_mentor = $input['bio_mentor'];
@@ -47,12 +55,16 @@ Class Mentor extends CI_Controller {
                 'email_mentor' => $email_mentor,
                 'password_mentor' => $password_mentor,
                 'latitude_mentor' => $latitude_mentor,
+                'alamat_mentor' => $alamat_mentor,
                 'longitude_mentor' => $longitude_mentor,
                 'pekerjaan_mentor' => $pekerjaan_mentor,
                 'bio_mentor' => $bio_mentor,
                 'tentang_mentor' => $tentang_mentor,
             );
-            $this->Mentor_Model->insert($data);
+            if ($this->form_validation->run() == TRUE) { //CHECK LAGI MUNGKIN ADA SALAH
+                $result = $this->Mentor_Model->insert($data);
+                echo json_encode($result);
+            }
             $mentor_id = $this->Mentor_Model->lastInsert();
             //buat masukin ke tabel yang lain
             $jenjang_pendidikan = $this->input->post('jenjang_pendidikan');
@@ -63,7 +75,8 @@ Class Mentor extends CI_Controller {
                     'jenjang_pendidikan' => $jenjang_pendidikan[$i],
                     'instansi_pendidikan' => $instansi_pendidikan[$i],
                 );
-                $this->Mentor_Model->insertSejarah($dataSejarah);
+                $resultSejarah = $this->Mentor_Model->insertSejarah($dataSejarah);
+                echo json_encode($resultSejarah);
             }
 
             $nama_pengalaman = $this->input->post('nama_pengalaman');
@@ -72,7 +85,8 @@ Class Mentor extends CI_Controller {
                     'id_mentor' => $mentor_id,
                     'nama_pengalaman' => $nama_pengalaman[$i],
                 );
-                $this->Mentor_Model->insertPengalaman($dataPengalaman);
+                $resultPengalaman = $this->Mentor_Model->insertPengalaman($dataPengalaman);
+                echo json_encode($resultPengalaman);
             }
 
             $nama_kualifikasi = $this->input->post('nama_kualifikasi');
@@ -83,7 +97,8 @@ Class Mentor extends CI_Controller {
                     'nama_kualifikasi' => $nama_kualifikasi[$i],
                     'tambahan_kualifikasi' => $tambahan_kualifikasi[$i], //insert data file ganti tipe file jadi blob
                 );
-                $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
+                $resultKualifikasi = $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
+                echo json_encode($resultKualifikasi);
             }
 
             $hari_ketersediaan = $this->input->post('hari_ketersediaan');
@@ -94,7 +109,8 @@ Class Mentor extends CI_Controller {
                     'hari_ketersediaan' => $hari_ketersediaan[$i],
                     'waktu_ketersediaan' => date("H:i", strtotime($waktu_ketersediaan[$i])),
                 );
-                $this->Mentor_Model->insertJadwal($dataJadwal);
+                $resultJadwal = $this->Mentor_Model->insertJadwal($dataJadwal);
+                echo json_encode($resultJadwal);
             }
 
             redirect('/admin/mentor', 'refresh');
@@ -105,6 +121,12 @@ Class Mentor extends CI_Controller {
     }
 
     function edit($ID) {
+        $this->form_validation->set_rules('nama_mentor', 'Nama Mentor', 'required');
+        $this->form_validation->set_rules('no_ponsel_mentor', 'Nomor Ponsel', 'required');
+        $this->form_validation->set_rules('jenis_kelamin_mentor', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('alamat_mentor', 'Alamat', 'required');
+        $this->form_validation->set_rules('email_mentor', 'Email', 'required');
+        $this->form_validation->set_rules('password_mentor', 'Password', 'required');
         if ($input = $this->input->post()) {
             $nama_mentor = $input['nama_mentor'];
             $no_identitas_mentor = $input['no_identitas_mentor'];
@@ -117,6 +139,7 @@ Class Mentor extends CI_Controller {
 
             $latitude_mentor = $input['latitude_mentor'];
             $longitude_mentor = $input['longitude_mentor'];
+            $alamat_mentor = $input ['alamat_mentor'];
 
             $pekerjaan_mentor = $input ['pekerjaan_mentor'];
             $bio_mentor = $input['bio_mentor'];
@@ -132,6 +155,7 @@ Class Mentor extends CI_Controller {
                 'password_mentor' => $password_mentor,
                 'latitude_mentor' => $latitude_mentor,
                 'longitude_mentor' => $longitude_mentor,
+                'alamat_mentor' => $alamat_mentor,
                 'pekerjaan_mentor' => $pekerjaan_mentor,
                 'bio_mentor' => $bio_mentor,
                 'tentang_mentor' => $tentang_mentor,
@@ -147,7 +171,8 @@ Class Mentor extends CI_Controller {
                         'jenjang_pendidikan' => $jenjang_pendidikan[$i],
                         'instansi_pendidikan' => $instansi_pendidikan[$i],
                     );
-                    $this->Mentor_Model->insertSejarah($dataSejarah);
+                    $resultSejarah = $this->Mentor_Model->insertSejarah($dataSejarah);
+                    echo json_encode($resultSejarah);
                 }
             }
 
@@ -158,7 +183,8 @@ Class Mentor extends CI_Controller {
                         'id_mentor' => $mentor_id,
                         'nama_pengalaman' => $nama_pengalaman[$i],
                     );
-                    $this->Mentor_Model->insertPengalaman($dataPengalaman);
+                    $resultPengalaman = $this->Mentor_Model->insertPengalaman($dataPengalaman);
+                    echo json_encode($resultPengalaman);
                 }
             }
 
@@ -171,7 +197,8 @@ Class Mentor extends CI_Controller {
                         'nama_kualifikasi' => $nama_kualifikasi[$i],
                         'tambahan_kualifikasi' => $tambahan_kualifikasi[$i], //insert data file ganti tipe file jadi blob
                     );
-                    $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
+                    $resultKualifikasi = $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
+                    echo json_encode($resultKualifikasi);
                 }
             }
             $hari_ketersediaan = $this->input->post('hari_ketersediaan');
@@ -184,11 +211,14 @@ Class Mentor extends CI_Controller {
                         'waktu_ketersediaan' => date("H:i", strtotime($waktu_ketersediaan[$i])),
                     );
                 }
-                $this->Mentor_Model->insertJadwal($dataJadwal);
+                $resultJadwal = $this->Mentor_Model->insertJadwal($dataJadwal);
+                echo json_encode($resultJadwal);
             }
-            
-            $this->Mentor_Model->edit($ID, $data); //buat edit data utama dari mentor
-            redirect('/admin/mentor');
+            if ($this->form_validation->run() == TRUE) {
+                $result = $this->Mentor_Model->edit($ID, $data); //buat edit data utama dari mentor
+                echo json_encode($result);
+                redirect('/admin/mentor');
+            }
         }
         $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //edit profil utama, edit data banyak nanti aja
         $param['dataSejarah'] = $this->Mentor_Model->getSejarah($ID)->result_array();
@@ -202,35 +232,40 @@ Class Mentor extends CI_Controller {
     }
 
     function delete($ID) {
-        $this->Mentor_Model->delete($ID);
+        $result = $this->Mentor_Model->delete($ID);
+        echo json_encode($result);
         redirect('/admin/mentor');
     }
 
     function deleteSejarah() {
         $IDMentor = $this->uri->segment(4);
         $IDPendidikan = $this->uri->segment(5);
-        $this->Mentor_Model->deleteSejarah($IDPendidikan);
+        $result = $this->Mentor_Model->deleteSejarah($IDPendidikan);
+        echo json_encode($result);
         redirect('/admin/mentor/edit/' . $IDMentor, 'refresh');
     }
 
     function deletePengalaman() {
         $IDMentor = $this->uri->segment(4);
         $IDPengalaman = $this->uri->segment(5);
-        $this->Mentor_Model->deletePengalaman($IDPengalaman);
+        $result = $this->Mentor_Model->deletePengalaman($IDPengalaman);
+        echo json_encode($result);
         redirect('/admin/mentor/edit/' . $IDMentor, 'refresh');
     }
 
     function deleteKualifikasi() {
         $IDMentor = $this->uri->segment(4);
         $IDKualifikasi = $this->uri->segment(5);
-        $this->Mentor_Model->deleteKualifikasi($IDKualifikasi);
+        $result = $this->Mentor_Model->deleteKualifikasi($IDKualifikasi);
+        echo json_encode($result);
         redirect('/admin/mentor/edit/' . $IDMentor, 'refresh');
     }
 
     function deleteJadwal() {
         $IDMentor = $this->uri->segment(4);
         $IDJadwal = $this->uri->segment(5);
-        $this->Mentor_Model->deleteJadwal($IDJadwal);
+        $result = $this->Mentor_Model->deleteJadwal($IDJadwal);
+        echo json_encode($result);
         redirect('/admin/mentor/edit/' . $IDMentor, 'refresh');
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 //validasi belum dikerjakan
 
 Class Student extends CI_Controller {
@@ -6,6 +7,7 @@ Class Student extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Student_Model');
+        $this->load->library('form_validation');
     }
 
     public function index() {
@@ -19,6 +21,13 @@ Class Student extends CI_Controller {
     }
 
     function input() {
+        $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'required');
+        $this->form_validation->set_rules('no_ponsel_siswa', 'Nomor Ponsel', 'required');
+        $this->form_validation->set_rules('jenis_kelamin_siswa', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('alamat_siswa', 'Alamat', 'required');
+        $this->form_validation->set_rules('email_siswa', 'Email', 'required');
+        $this->form_validation->set_rules('password_siswa', 'Password', 'required');
+
         if ($input = $this->input->post()) {
             $nama_siswa = $input['nama_siswa'];
             $no_identitas_siswa = $input['no_identitas_siswa'];
@@ -48,9 +57,11 @@ Class Student extends CI_Controller {
                 'longitude_siswa' => $longitude_siswa,
                 'alamat_siswa' => $alamat_siswa,
             );
-
-            $this->Student_Model->insert($data);
-            redirect('/admin/student');
+            if ($this->form_validation->run() == TRUE) {
+                $result = $this->Student_Model->insert($data);
+                echo json_encode($result);
+                redirect('/admin/student');
+            }
         }
         $this->load->view('include/header');
         $this->load->view('detail-student');
@@ -58,6 +69,12 @@ Class Student extends CI_Controller {
     }
 
     function edit($ID) {
+        $this->form_validation->set_rules('nama_siswa', 'Nama Siswa', 'required');
+        $this->form_validation->set_rules('no_ponsel_siswa', 'Nomor Ponsel', 'required');
+        $this->form_validation->set_rules('jenis_kelamin_siswa', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('alamat_siswa', 'Alamat', 'required');
+        $this->form_validation->set_rules('email_siswa', 'Email', 'required');
+        $this->form_validation->set_rules('password_siswa', 'Password', 'required');
         if ($input = $this->input->post()) {
             $nama_siswa = $input['nama_siswa'];
             $no_identitas_siswa = $input['no_identitas_siswa'];
@@ -86,11 +103,12 @@ Class Student extends CI_Controller {
                 'latitude_siswa' => $latitude_siswa,
                 'longitude_siswa' => $longitude_siswa,
                 'alamat_siswa' => $alamat_siswa,
-
             );
-
-            $this->Student_Model->edit($ID, $data);
-            redirect('/admin/student');
+            if ($this->form_validation->run() == TRUE) {
+                $result = $this->Student_Model->edit($ID, $data);
+                echo json_encode($result);
+                redirect('/admin/student');
+            }
         }
         $param['data'] = $this->Student_Model->getById($ID)->row_array();
         $this->load->view('include/header');
@@ -99,7 +117,8 @@ Class Student extends CI_Controller {
     }
 
     function delete($ID) {
-        $this->Student_Model->delete($ID);
+        $result = $this->Student_Model->delete($ID);
+        echo json_encode($result);
         redirect('/admin/student');
     }
 

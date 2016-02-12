@@ -37,6 +37,11 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
 ?>
 
 <h3><i class="fa fa-angle-right"></i> Mentor </h3>
+<?php
+if (validation_errors() == TRUE) {
+    ?>
+    <div class="alert alert-danger"><?php echo validation_errors(); ?></div>
+<?php } ?>
 <div class="row mt">
     <div class="col-lg-12">
         <form class="form-horizontal style-form" method="post">
