@@ -13,7 +13,7 @@ echo 'id siswa' . $id_siswa;
                                 </div>
                                 <i class="fa fa-3x fa-university"></i> <br><br>
                                 <p>
-                                      <?= $m['id_harga'] ?><br>
+                                <?= $m['id_harga'] ?><br>
                                 <?= $m['tingkat_mapel'] ?><br>
                                 <?= $m['nama_mapel'] ?><br>
                                 <?= $m['harga'] ?><br>

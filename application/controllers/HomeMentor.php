@@ -7,13 +7,28 @@ Class HomeMentor extends CI_Controller {
         $this->load->model('Mentor_Model');
         $this->load->model('Harga_Model');
         $this->load->model('Kelas_Model');
-        $this->load->library('form_validation');
     }
 
-    public function index() {
-        $ID = 1; //untuk uji coba id mentor 1 
+//    public function index() {
+//       // $ID = 1; //untuk uji coba id mentor 1 
+//        $param['asal'] = "coba";
+//
+//        $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //ambil data profil utama
+//        $param['dataSejarah'] = $this->Mentor_Model->getSejarah($ID)->result_array();
+//        $param['dataPengalaman'] = $this->Mentor_Model->getPengalaman($ID)->result_array();
+//        $param['dataKualifikasi'] = $this->Mentor_Model->getKualifikasi($ID)->result_array();
+//        $param['dataJadwal'] = $this->Mentor_Model->getJadwal($ID)->result_array();
+//
+//        $param['dataHarga'] = $this->Harga_Model->getHargaMentor($ID)->result_array();
+//        $param['dataKelas'] = $this->Kelas_Model->getKelasByIdMentor($ID)->result_array();
+//        //buat include template
+//        $this->load->view('include/header', $param);
+//        $this->load->view('homementor', $param);
+//        $this->load->view('include/footer');
+//        //--------------------------------------------
+//    }
+    public function view($ID) {
         $param['asal'] = "coba";
-
         $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //ambil data profil utama
         $param['dataSejarah'] = $this->Mentor_Model->getSejarah($ID)->result_array();
         $param['dataPengalaman'] = $this->Mentor_Model->getPengalaman($ID)->result_array();

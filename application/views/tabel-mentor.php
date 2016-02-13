@@ -18,7 +18,7 @@
         <tbody>
             <tr>
                 <td><?= $m['id_mentor'] ?></td>
-                <td><?= $m['nama_mentor'] ?></td>
+                <td><a href="<?= $this->config->base_url('/index.php/homementor/view') ?>/<?= $m['id_mentor'] ?>"><?= $m['nama_mentor'] ?></a></td>
                 <td><?= $m['no_identitas_mentor'] ?></td>
                 <td><?= $m['jenis_kelamin_mentor'] ?></td>
                 <td><?= $m['no_ponsel_mentor'] ?></td>

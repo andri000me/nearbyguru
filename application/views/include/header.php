@@ -99,8 +99,8 @@
                                 <span>COBA</span>
                             </a>
                             <ul class="sub">  
-                                <li><a   href="<?= $this->config->base_url('/index.php/homementor') ?>">Home Mentor</a></li>
-                                <li><a   href="<?= $this->config->base_url('/index.php/homesiswa') ?>">Home Siswa</a></li>
+                                <!--<li><a   href="<?= $this->config->base_url('/index.php/homementor') ?>">Home Mentor</a></li>
+                                <li><a   href="<?= $this->config->base_url('/index.php/homesiswa') ?>">Home Siswa</a></li>-->
                                 <li><a   href="<?= $this->config->base_url('/index.php/enrollkelas') ?>">Tampilan Kelas di User</a></li>
                             </ul>
                         </li>

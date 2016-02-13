@@ -69,7 +69,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
             <table cellpadding="3">
                 <tr>
                     <td style="width: 200px;" ><h4><i class="fa fa-building"> </i> Kelas </h4></td>
-                    <td><button class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/admin/harga/') ?>'">
+                    <td><button class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/enrollkelas/view')?>/<?= $id_siswa ?>'">
                             <i class="fa fa-search"> Cari Kursus</i>
                         </button></td>
                     <td></td>

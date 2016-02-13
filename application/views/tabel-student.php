@@ -20,7 +20,7 @@
         <tbody>
             <tr>
                 <td><?= $m['id_siswa'] ?></td>
-                <td><?= $m['nama_siswa'] ?></td>
+                <td><a href="<?= $this->config->base_url('/index.php/homesiswa/view') ?>/<?= $m['id_siswa'] ?>"><?= $m['nama_siswa'] ?></a></td>
                 <td><?= $m['no_identitas_siswa'] ?></td>
                 <td><?= $m['jenis_kelamin_siswa'] ?></td>
                 <td><?= $m['sekolah_siswa'] ?></td>
