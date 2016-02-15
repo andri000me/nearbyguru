@@ -42,6 +42,7 @@ Class Student extends CI_Controller {
             $latitude_siswa = $input['latitude_siswa'];
             $longitude_siswa = $input['longitude_siswa'];
             $alamat_siswa = $input['alamat_siswa'];
+            $foto_siswa = file_get_contents($_FILES["foto_siswa"]["tmp_name"]);
 
             $data = array(
                 'nama_siswa' => $nama_siswa,
@@ -56,6 +57,7 @@ Class Student extends CI_Controller {
                 'latitude_siswa' => $latitude_siswa,
                 'longitude_siswa' => $longitude_siswa,
                 'alamat_siswa' => $alamat_siswa,
+                'foto_siswa' => $foto_siswa
             );
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Student_Model->insert($data);
@@ -75,7 +77,10 @@ Class Student extends CI_Controller {
         $this->form_validation->set_rules('alamat_siswa', 'Alamat', 'required');
         $this->form_validation->set_rules('email_siswa', 'Email', 'required');
         $this->form_validation->set_rules('password_siswa', 'Password', 'required');
+
+
         if ($input = $this->input->post()) {
+
             $nama_siswa = $input['nama_siswa'];
             $no_identitas_siswa = $input['no_identitas_siswa'];
             $jenis_kelamin_siswa = $input['jenis_kelamin_siswa'];
@@ -89,25 +94,45 @@ Class Student extends CI_Controller {
             $latitude_siswa = $input['latitude_siswa'];
             $longitude_siswa = $input['longitude_siswa'];
             $alamat_siswa = $input['alamat_siswa'];
+            if ($_FILES["foto_mentor"]["tmp_name"] != "") { //jika foto berubah maka update kolom foto pada database mentor
+                $foto_siswa = file_get_contents($_FILES["foto_siswa"]["tmp_name"]);
+                $data = array(
+                    'nama_siswa' => $nama_siswa,
+                    'no_identitas_siswa' => $no_identitas_siswa,
+                    'jenis_kelamin_siswa' => $jenis_kelamin_siswa,
+                    'tempat_lahir_siswa' => $tempat_lahir_siswa,
+                    'tanggal_lahir_siswa' => $tanggal_lahir_siswa,
+                    'no_ponsel_siswa' => $no_ponsel_siswa,
+                    'sekolah_siswa' => $sekolah_siswa,
+                    'email_siswa' => $email_siswa,
+                    'password_siswa' => $password_siswa,
+                    'latitude_siswa' => $latitude_siswa,
+                    'longitude_siswa' => $longitude_siswa,
+                    'alamat_siswa' => $alamat_siswa,
+                    'foto_siswa' => $foto_siswa
+                );
+            } else { //jika foto tidak berubah maka jangan update didatabase
+                $data = array(
+                    'nama_siswa' => $nama_siswa,
+                    'no_identitas_siswa' => $no_identitas_siswa,
+                    'jenis_kelamin_siswa' => $jenis_kelamin_siswa,
+                    'tempat_lahir_siswa' => $tempat_lahir_siswa,
+                    'tanggal_lahir_siswa' => $tanggal_lahir_siswa,
+                    'no_ponsel_siswa' => $no_ponsel_siswa,
+                    'sekolah_siswa' => $sekolah_siswa,
+                    'email_siswa' => $email_siswa,
+                    'password_siswa' => $password_siswa,
+                    'latitude_siswa' => $latitude_siswa,
+                    'longitude_siswa' => $longitude_siswa,
+                    'alamat_siswa' => $alamat_siswa,
+                );
+            }
 
-            $data = array(
-                'nama_siswa' => $nama_siswa,
-                'no_identitas_siswa' => $no_identitas_siswa,
-                'jenis_kelamin_siswa' => $jenis_kelamin_siswa,
-                'tempat_lahir_siswa' => $tempat_lahir_siswa,
-                'tanggal_lahir_siswa' => $tanggal_lahir_siswa,
-                'no_ponsel_siswa' => $no_ponsel_siswa,
-                'sekolah_siswa' => $sekolah_siswa,
-                'email_siswa' => $email_siswa,
-                'password_siswa' => $password_siswa,
-                'latitude_siswa' => $latitude_siswa,
-                'longitude_siswa' => $longitude_siswa,
-                'alamat_siswa' => $alamat_siswa,
-            );
+
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Student_Model->edit($ID, $data);
                 echo json_encode($result);
-                redirect('/admin/student');
+                redirect('/homesiswa/view/' . $ID);
             }
         }
         $param['data'] = $this->Student_Model->getById($ID)->row_array();

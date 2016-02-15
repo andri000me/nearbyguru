@@ -2,6 +2,7 @@
 if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di controller untuk ditampilkan
     $id_mentor = $data['id_mentor'];
     $nama_mentor = $data['nama_mentor'];
+    $foto_mentor = $data['foto_mentor'];
     $no_identitas_mentor = $data['no_identitas_mentor'];
     $jenis_kelamin_mentor = $data['jenis_kelamin_mentor'];
     $tempat_lahir_mentor = $data['tempat_lahir_mentor'];
@@ -29,6 +30,17 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <td><button class="btn btn-primary btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/admin/mentor/edit') ?>/<?= $id_mentor ?>'">
                             <i class="fa fa-pencil"> EDIT PROFIL</i>
                         </button></td>
+                        <td rowspan="7" style="width:500px;" >
+                        <div class="pull-right">
+                            <?php
+                            if ($foto_mentor == "") {
+                                echo 'Not have Photo';
+                            } else {
+                                echo '<img class="img-responsive" height="150" width="150" src="data:image/jpeg;base64,' . base64_encode($foto_mentor) . '"/>';
+                            }
+                            ?>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 200px;" colspan="3"><h2><strong><?php echo $nama_mentor; ?></strong></h2></td>

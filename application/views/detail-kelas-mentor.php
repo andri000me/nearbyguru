@@ -41,13 +41,13 @@ if (validation_errors() == TRUE) {
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label"> Waktu Masuk :</label>
                     <div class="col-sm-10">
-                        <input value='<?= $waktu_masuk ?>' type='text' name='waktu_masuk' class="form-control">
+                        <input value='<?= $waktu_masuk ?>' type='time' name='waktu_masuk' class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label"> Waktu Keluar :</label>
                     <div class="col-sm-10">
-                        <input value='<?= $waktu_keluar ?>' type='text' name='waktu_keluar' class="form-control">
+                        <input value='<?= $waktu_keluar ?>' type='time' name='waktu_keluar' class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,7 +57,7 @@ if (validation_errors() == TRUE) {
                     </div>
                 </div>
             </form>
-            <button class="btn btn-danger" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editKelasByMentor/') ?>'">
+            <button class="btn btn-danger" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/editKelasByMentor') ?>/<?= $id_mentor ?>'">
                 <i class="fa fa-times"> Batal</i>
             </button>
         </div>

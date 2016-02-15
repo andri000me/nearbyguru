@@ -7,6 +7,8 @@ Class HomeMentor extends CI_Controller {
         $this->load->model('Mentor_Model');
         $this->load->model('Harga_Model');
         $this->load->model('Kelas_Model');
+        $this->load->library('form_validation');
+        
     }
 
 //    public function index() {
@@ -104,8 +106,8 @@ Class HomeMentor extends CI_Controller {
             $waktu_keluar = $input['waktu_keluar'];
 
             $data = array(
-                'waktu_masuk' => $waktu_masuk,
-                'waktu_keluar' => $waktu_keluar,
+                'waktu_masuk' =>date("H:i", strtotime($waktu_masuk)),
+                'waktu_keluar' => date("H:i", strtotime($waktu_keluar))
             );
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Kelas_Model->edit($IDKelas, $data);

@@ -2,6 +2,7 @@
 if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di controller untuk ditampilkan
     $id_siswa = $data['id_siswa'];
     $nama_siswa = $data['nama_siswa'];
+    $foto_siswa = $data['foto_siswa'];
     $no_identitas_siswa = $data['no_identitas_siswa'];
     $jenis_kelamin_siswa = $data['jenis_kelamin_siswa'];
     $tempat_lahir_siswa = $data['tempat_lahir_siswa'];
@@ -27,6 +28,17 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                     <td><button class="btn btn-primary" onclick="window.location.href = '<?= $this->config->base_url('/index.php/admin/student/edit') ?>/<?= $id_siswa ?>'">
                             <i class="fa fa-pencil"> EDIT PROFIL</i>
                         </button></td>
+                    <td rowspan="7" style="width:500px;" >
+                        <div class="pull-right">
+                            <?php
+                            if ($foto_siswa == "") {
+                                echo 'Not have Photo';
+                            } else {
+                                echo '<img class="img-responsive" height="150" width="150" src="data:image/jpeg;base64,' . base64_encode($foto_siswa) . '"/>';
+                            }
+                            ?>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 200px;" colspan="3"><h2><strong><?php echo $nama_siswa; ?></strong></h2></td>
@@ -69,7 +81,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
             <table cellpadding="3">
                 <tr>
                     <td style="width: 200px;" ><h4><i class="fa fa-building"> </i> Kelas </h4></td>
-                    <td><button class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/enrollkelas/view')?>/<?= $id_siswa ?>'">
+                    <td><button class="btn btn-theme03" onclick="window.location.href = '<?= $this->config->base_url('/index.php/enrollkelas/view') ?>/<?= $id_siswa ?>'">
                             <i class="fa fa-search"> Cari Kursus</i>
                         </button></td>
                     <td></td>
@@ -88,7 +100,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                             <th> Waktu Keluar </th>
                         </tr>
                     </thead>
-                    <?php foreach ($dataKelas as $m) { ?>
+<?php foreach ($dataKelas as $m) { ?>
                         <tbody>
                             <tr>
                                 <td><?= $m['tingkat_mapel'] ?></td>	
@@ -101,7 +113,7 @@ if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di control
                                 <td><?= $m['waktu_keluar'] ?></td>
                             </tr>
                         </tbody>
-                    <?php } ?>
+<?php } ?>
                 </table>
                 </tr>
             </table>

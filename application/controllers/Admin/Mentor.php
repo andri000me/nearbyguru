@@ -45,6 +45,8 @@ Class Mentor extends CI_Controller {
             $bio_mentor = $input['bio_mentor'];
             $tentang_mentor = $input['tentang_mentor'];
 
+            $foto_mentor = file_get_contents($_FILES["foto_mentor"]["tmp_name"]);
+
             $data = array(
                 'nama_mentor' => $nama_mentor,
                 'no_identitas_mentor' => $no_identitas_mentor,
@@ -60,6 +62,7 @@ Class Mentor extends CI_Controller {
                 'pekerjaan_mentor' => $pekerjaan_mentor,
                 'bio_mentor' => $bio_mentor,
                 'tentang_mentor' => $tentang_mentor,
+                'foto_mentor' => $foto_mentor
             );
             if ($this->form_validation->run() == TRUE) { //CHECK LAGI MUNGKIN ADA SALAH
                 $result = $this->Mentor_Model->insert($data);
@@ -90,12 +93,12 @@ Class Mentor extends CI_Controller {
             }
 
             $nama_kualifikasi = $this->input->post('nama_kualifikasi');
-            $tambahan_kualifikasi = $this->input->post('tambahan_kualifikasi'); // inputan dalam bentuk file seharusnya
             for ($i = 0; $i < count($nama_kualifikasi); $i++) {
                 $dataKualifikasi = array(
                     'id_mentor' => $mentor_id,
-                    'nama_kualifikasi' => $nama_kualifikasi[$i],
-                    'tambahan_kualifikasi' => $tambahan_kualifikasi[$i], //insert data file ganti tipe file jadi blob
+                    'nama_kualifikasi' => $nama_kualifikasi[$i],                        
+                    'tambahan_kualifikasi' => base64_encode(file_get_contents($_FILES['tambahan_kualifikasi']['tmp_name'][$i]))
+
                 );
                 $resultKualifikasi = $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
                 echo json_encode($resultKualifikasi);
@@ -144,22 +147,45 @@ Class Mentor extends CI_Controller {
             $pekerjaan_mentor = $input ['pekerjaan_mentor'];
             $bio_mentor = $input['bio_mentor'];
             $tentang_mentor = $input['tentang_mentor'];
-            $data = array(
-                'nama_mentor' => $nama_mentor,
-                'no_identitas_mentor' => $no_identitas_mentor,
-                'jenis_kelamin_mentor' => $jenis_kelamin_mentor,
-                'tempat_lahir_mentor' => $tempat_lahir_mentor,
-                'tanggal_lahir_mentor' => date("d-m-Y", strtotime($tanggal_lahir_mentor)),
-                'no_ponsel_mentor' => $no_ponsel_mentor,
-                'email_mentor' => $email_mentor,
-                'password_mentor' => $password_mentor,
-                'latitude_mentor' => $latitude_mentor,
-                'longitude_mentor' => $longitude_mentor,
-                'alamat_mentor' => $alamat_mentor,
-                'pekerjaan_mentor' => $pekerjaan_mentor,
-                'bio_mentor' => $bio_mentor,
-                'tentang_mentor' => $tentang_mentor,
-            );
+
+            if ($_FILES["foto_mentor"]["tmp_name"] != "") {
+                $foto_mentor = file_get_contents($_FILES["foto_mentor"]["tmp_name"]);
+                $data = array(
+                    'nama_mentor' => $nama_mentor,
+                    'no_identitas_mentor' => $no_identitas_mentor,
+                    'jenis_kelamin_mentor' => $jenis_kelamin_mentor,
+                    'tempat_lahir_mentor' => $tempat_lahir_mentor,
+                    'tanggal_lahir_mentor' => date("d-m-Y", strtotime($tanggal_lahir_mentor)),
+                    'no_ponsel_mentor' => $no_ponsel_mentor,
+                    'email_mentor' => $email_mentor,
+                    'password_mentor' => $password_mentor,
+                    'latitude_mentor' => $latitude_mentor,
+                    'longitude_mentor' => $longitude_mentor,
+                    'alamat_mentor' => $alamat_mentor,
+                    'pekerjaan_mentor' => $pekerjaan_mentor,
+                    'bio_mentor' => $bio_mentor,
+                    'tentang_mentor' => $tentang_mentor,
+                    'foto_mentor' => $foto_mentor
+                );
+            } else {
+                $data = array(
+                    'nama_mentor' => $nama_mentor,
+                    'no_identitas_mentor' => $no_identitas_mentor,
+                    'jenis_kelamin_mentor' => $jenis_kelamin_mentor,
+                    'tempat_lahir_mentor' => $tempat_lahir_mentor,
+                    'tanggal_lahir_mentor' => date("d-m-Y", strtotime($tanggal_lahir_mentor)),
+                    'no_ponsel_mentor' => $no_ponsel_mentor,
+                    'email_mentor' => $email_mentor,
+                    'password_mentor' => $password_mentor,
+                    'latitude_mentor' => $latitude_mentor,
+                    'longitude_mentor' => $longitude_mentor,
+                    'alamat_mentor' => $alamat_mentor,
+                    'pekerjaan_mentor' => $pekerjaan_mentor,
+                    'bio_mentor' => $bio_mentor,
+                    'tentang_mentor' => $tentang_mentor,
+                );
+            }
+
             $mentor_id = $ID; //ngambil ID si Mentor buat nambahin data yang baru
 
             $jenjang_pendidikan = $this->input->post('jenjang_pendidikan');
@@ -187,15 +213,14 @@ Class Mentor extends CI_Controller {
                     echo json_encode($resultPengalaman);
                 }
             }
-
+            
             $nama_kualifikasi = $this->input->post('nama_kualifikasi');
-            $tambahan_kualifikasi = $this->input->post('tambahan_kualifikasi'); // inputan dalam bentuk file seharusnya
             if ($nama_kualifikasi != NULL) {
                 for ($i = 0; $i < count($nama_kualifikasi); $i++) {
                     $dataKualifikasi = array(
                         'id_mentor' => $mentor_id,
                         'nama_kualifikasi' => $nama_kualifikasi[$i],
-                        'tambahan_kualifikasi' => $tambahan_kualifikasi[$i], //insert data file ganti tipe file jadi blob
+                        'tambahan_kualifikasi' => base64_encode(file_get_contents($_FILES['tambahan_kualifikasi']['tmp_name'][$i]))
                     );
                     $resultKualifikasi = $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
                     echo json_encode($resultKualifikasi);
@@ -217,7 +242,7 @@ Class Mentor extends CI_Controller {
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Mentor_Model->edit($ID, $data); //buat edit data utama dari mentor
                 echo json_encode($result);
-                redirect('/admin/mentor');
+                redirect('/admin/mentor/edit/' . $ID);
             }
         }
         $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //edit profil utama, edit data banyak nanti aja

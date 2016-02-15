@@ -18,6 +18,7 @@ $tentang_mentor = '';
 
 if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di controller untuk ditampilkan
     $nama_mentor = $data['nama_mentor'];
+    $foto_mentor = $data['foto_mentor'];
     $no_identitas_mentor = $data['no_identitas_mentor'];
     $jenis_kelamin_mentor = $data['jenis_kelamin_mentor'];
     $tempat_lahir_mentor = $data['tempat_lahir_mentor'];
@@ -44,9 +45,22 @@ if (validation_errors() == TRUE) {
 <?php } ?>
 <div class="row mt">
     <div class="col-lg-12">
-        <form class="form-horizontal style-form" method="post">
+        <form class="form-horizontal style-form" method="post" enctype="multipart/form-data">
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Profil Mentor</h4>
+                <div class="form-group">
+                     <label class="col-sm-2 col-sm-2 control-label">Ganti Foto</label>
+                     <div class="col-sm-3">
+                         <?php
+                            if ($foto_mentor == "") {
+                                echo 'Not have Photo';
+                            } else {
+                                echo '<img class="img-responsive" height="150" width="150" src="data:image/jpeg;base64,' . base64_encode($foto_mentor) . '"/>';
+                            }
+                            ?>
+                        <input type='file' name='foto_mentor' class="form-control">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Nama :</label>
                     <div class="col-sm-10">
@@ -250,18 +264,16 @@ if (validation_errors() == TRUE) {
             <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-            <div class="form-panel"> <!-- BUAT TABEL SPT TAUFIQ DULU JUGA/tambahkan juga tampilanny dan view datanya yang diupload -->
+            <div class="form-panel"> 
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Kualifikasi dan Sertifikat : </h4>
                 <table class="table col-sm-12">
 
                     <tr>
-                        <td>Kualifikasi dan sertifikat</td>
-                        <td>File Tambahan (masih belum)</td>
+                        <td colspan="2">Kualifikasi dan sertifikat</td>
                     </tr>
 
                     <tr>
-                        <td><input type='text' name='nama_kualifikasi' id="nama_kualifikasi"/></td>
-                        <td><input type='text' name='tambahan_kualifikasi' id="tambahan_kualifikasi"/></td> <!-- ganti dengan upload file ke db -->
+                        <td colspan="2"><input style="width:300px;" type='text' name='nama_kualifikasi' id="nama_kualifikasi"/></td>
                         <td><button type='button' id="inputKualifikasi"/>Tambah</button></td>
 
                     </tr>
@@ -269,8 +281,8 @@ if (validation_errors() == TRUE) {
                     <table id='kualifikasi' class="table-bordered">
                         <thead>
                             <tr>
-                                <th>Kualifikasi dan sertifikat</th>
-                                <th>File Tambahan (masih belum)</th>
+                                <th colspan="2">Kualifikasi dan sertifikat</th>
+                               <th>File Tambahan</th>
                             </tr>
                         </thead>
                         <tbody aria-data='0'>
@@ -285,15 +297,15 @@ if (validation_errors() == TRUE) {
                 <table class="table table-striped table-advance table-hover">
                     <thead>
                         <tr>
-                            <th>Kualifikasi dan sertifikat</th>
-                            <th>File Tambahan (masih belum)</th>
+                            <th colspan="2">Kualifikasi dan sertifikat</th>
+                           <th>File Tambahan </th>
                             <th colspan="2"> Action </th>
                         </tr>
                     </thead>
                     <?php foreach ($dataKualifikasi as $m) { ?>
                         <tbody>
                             <tr>
-                                <td><?= $m['nama_kualifikasi'] ?></td>
+                                <td colspan="2"><?= $m['nama_kualifikasi'] ?></td>
                                 <td><?= $m['tambahan_kualifikasi'] ?></td>
                                 <td> <button type="button" class="btn btn-danger btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/admin/mentor/deleteKualifikasi') ?>/<?= $m['id_mentor'] ?>/<?= $m['id_kualifikasi'] ?>'">
                                         <i class="fa fa-trash-o ">
@@ -367,7 +379,7 @@ if (validation_errors() == TRUE) {
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-8">
-                    <button type="submit" class="member btn btn-success" name="btn_submit"><i class="fa fa-check"></i> Simpan </button>]
+                    <button type="submit" class="member btn btn-success" name="btn_submit"><i class="fa fa-check"></i> Simpan </button>
                 </div>
             </div>
         </form>

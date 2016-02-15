@@ -16,6 +16,7 @@ $alamat_siswa = '';
 if (isset($data)) { //--- saat melakukan edit ambil data yang dikirim di controller untuk ditampilkan
     $nama_siswa = $data['nama_siswa'];
     $no_identitas_siswa = $data['no_identitas_siswa'];
+    $foto_siswa = $data['foto_siswa'];
     $jenis_kelamin_siswa = $data['jenis_kelamin_siswa'];
     $tempat_lahir_siswa = $data['tempat_lahir_siswa'];
     $tanggal_lahir_siswa = $data['tanggal_lahir_siswa'];
@@ -40,8 +41,20 @@ if (validation_errors() == TRUE) {
     <div class="col-lg-12">
         <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i> Profil Siswa</h4>
-            <form class="form-horizontal style-form" method="post">
-
+            <form class="form-horizontal style-form" method="post"  enctype="multipart/form-data">
+                <div class="form-group">
+                     <label class="col-sm-2 col-sm-2 control-label">Ganti Foto</label>
+                     <div class="col-sm-3">
+                         <?php
+                            if ($foto_siswa == "") {
+                                echo 'Not have Photo';
+                            } else {
+                                echo '<img class="img-responsive" height="150" width="150" src="data:image/jpeg;base64,' . base64_encode($foto_siswa) . '"/>';
+                            }
+                            ?>
+                        <input type='file' name='foto_siswa' class="form-control">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Nama :</label>
                     <div class="col-sm-10">

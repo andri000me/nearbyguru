@@ -89,21 +89,7 @@
                             </ul>
                         </li>
                         <!------------------------------------------------------------------------------------------------------------------------------->
-                         <li class="sub-menu">
-                            <a <?php
-                            if (isset($asal) AND $asal == "coba") {
-                                echo "class='active'";
-                            }
-                            ?> href="javascript:;" >
-                                <i class="fa fa-desktop"></i>
-                                <span>COBA</span>
-                            </a>
-                            <ul class="sub">  
-                                <!--<li><a   href="<?= $this->config->base_url('/index.php/homementor') ?>">Home Mentor</a></li>
-                                <li><a   href="<?= $this->config->base_url('/index.php/homesiswa') ?>">Home Siswa</a></li>-->
-                                <li><a   href="<?= $this->config->base_url('/index.php/enrollkelas') ?>">Tampilan Kelas di User</a></li>
-                            </ul>
-                        </li>
+                         
                         <!------------------------------------------------------------------------------------------------------------------------------->
                     </ul>
                     <!-- sidebar menu end-->

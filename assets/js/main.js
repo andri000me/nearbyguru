@@ -38,6 +38,7 @@ $(document).ready(function ()
         $('#pengalaman tbody').attr('aria-data',jumlah_baris_pengalaman);
 
     });
+    //Upload datanya belum --------------------------------------------------------------------------------------------
     $('#inputKualifikasi').click(function () {
         var jumlah_baris_kualifikasi = $('#kualifikasi tbody').attr('aria-data');
         var nama_kualifikasi = $('#nama_kualifikasi').val();
@@ -45,7 +46,7 @@ $(document).ready(function ()
         var data_kualifikasi =
                 "<tr id='"+ nama_kualifikasi + "'>" +
                 "<td><input type='text'   name='nama_kualifikasi[]' value='" + nama_kualifikasi + "'/></td>" +
-                "<td><input type='text'   name='tambahan_kualifikasi[]' value='" + tambahan_kualifikasi + "'/></td>" +
+                "<td><input type='file'   name='tambahan_kualifikasi[]' value='" + tambahan_kualifikasi + "'/></td>" +
                 "<td><button type='button' onclick='$(this).parent().parent().remove()'>Hapus</button></td>" +
                 "</tr>"
                 ;
@@ -58,6 +59,7 @@ $(document).ready(function ()
         $('#kualifikasi tbody').attr('aria-data',jumlah_baris_kualifikasi);
 
     });
+    //---------------------------------------------------------------------------------------------------------------
     $('#inputJadwal').click(function () {
         var jumlah_baris_jadwal = $('#jadwal tbody').attr('aria-data');
         var hari_ketersediaan = $('#hari_ketersediaan').val();

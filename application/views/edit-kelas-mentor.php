@@ -45,7 +45,7 @@
                 </tbody>
             <?php } ?>
             <tr>
-                <td><button type="button" class="btn btn-theme02 btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/') ?>'">
+                <td><button type="button" class="btn btn-theme02 btn-xs" onclick="window.location.href = '<?= $this->config->base_url('/index.php/homementor/view') ?>/<?= $m['id_mentor'] ?>'">
                         <i class="fa fa-arrow-circle-left ">
                             Kembali
                         </i>
