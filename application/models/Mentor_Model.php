@@ -86,6 +86,11 @@ Class Mentor_Model extends CI_MODEL { //tambahin buat ngatur aneh2 itu
         return $this->db->get_where('mentor', array('id_mentor' => $ID));
     }
 
+    public function login($data) {
+        $q = $this->db->query('select id_mentor from mentor where username_mentor = ' .$data['username_mentor'] .
+                ' and password_mentor = ' . $data['password_mentor']);
+        return $q;
+    }
 }
 
 ?>

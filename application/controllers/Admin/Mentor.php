@@ -5,7 +5,7 @@ Class Mentor extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Mentor_Model');
-        $this->load->library('form_validation');
+        $this->load->library('form_validation');//SAAT ANDROID INI TIDAK DIGUNAKAN, UBAH BEBERAPA CODE UNTUK MENYIMPAN DATA
     }
 
     public function index() {
@@ -96,9 +96,8 @@ Class Mentor extends CI_Controller {
             for ($i = 0; $i < count($nama_kualifikasi); $i++) {
                 $dataKualifikasi = array(
                     'id_mentor' => $mentor_id,
-                    'nama_kualifikasi' => $nama_kualifikasi[$i],                        
+                    'nama_kualifikasi' => $nama_kualifikasi[$i],
                     'tambahan_kualifikasi' => base64_encode(file_get_contents($_FILES['tambahan_kualifikasi']['tmp_name'][$i]))
-
                 );
                 $resultKualifikasi = $this->Mentor_Model->insertKualifikasi($dataKualifikasi);
                 echo json_encode($resultKualifikasi);
@@ -121,6 +120,13 @@ Class Mentor extends CI_Controller {
         $this->load->view('include/header');
         $this->load->view('detail-mentor');
         $this->load->view('include/footer');
+        //-------------UNTUK ANDROID -------------------------------------------
+        //ANDROID KIRIM REQUEST BUAT MENTOR BARU
+        //1. DECODE DATA-DATA ANDROID
+        //2. MASUKIN KE DATABASE
+        //3. KIRIM RESPONSE KE ANDROID
+        //UNTUK DATA TAMBAHAN BISA DITAMBAHKAN SAAT DIEDIT (DATA-DATA ARRAY LIAT DULU BAGAIMANA CARA ULWAN STORE DATANYA)
+        //----------------------------------------------------------------------
     }
 
     function edit($ID) {
@@ -147,8 +153,24 @@ Class Mentor extends CI_Controller {
             $pekerjaan_mentor = $input ['pekerjaan_mentor'];
             $bio_mentor = $input['bio_mentor'];
             $tentang_mentor = $input['tentang_mentor'];
-
-            if ($_FILES["foto_mentor"]["tmp_name"] != "") {
+            if (file_get_contents($_FILES["foto_mentor"]["tmp_name"]) == NULL) {
+                $data = array(
+                    'nama_mentor' => $nama_mentor,
+                    'no_identitas_mentor' => $no_identitas_mentor,
+                    'jenis_kelamin_mentor' => $jenis_kelamin_mentor,
+                    'tempat_lahir_mentor' => $tempat_lahir_mentor,
+                    'tanggal_lahir_mentor' => date("d-m-Y", strtotime($tanggal_lahir_mentor)),
+                    'no_ponsel_mentor' => $no_ponsel_mentor,
+                    'email_mentor' => $email_mentor,
+                    'password_mentor' => $password_mentor,
+                    'latitude_mentor' => $latitude_mentor,
+                    'longitude_mentor' => $longitude_mentor,
+                    'alamat_mentor' => $alamat_mentor,
+                    'pekerjaan_mentor' => $pekerjaan_mentor,
+                    'bio_mentor' => $bio_mentor,
+                    'tentang_mentor' => $tentang_mentor,
+                );
+            } else {
                 $foto_mentor = file_get_contents($_FILES["foto_mentor"]["tmp_name"]);
                 $data = array(
                     'nama_mentor' => $nama_mentor,
@@ -167,25 +189,7 @@ Class Mentor extends CI_Controller {
                     'tentang_mentor' => $tentang_mentor,
                     'foto_mentor' => $foto_mentor
                 );
-            } else {
-                $data = array(
-                    'nama_mentor' => $nama_mentor,
-                    'no_identitas_mentor' => $no_identitas_mentor,
-                    'jenis_kelamin_mentor' => $jenis_kelamin_mentor,
-                    'tempat_lahir_mentor' => $tempat_lahir_mentor,
-                    'tanggal_lahir_mentor' => date("d-m-Y", strtotime($tanggal_lahir_mentor)),
-                    'no_ponsel_mentor' => $no_ponsel_mentor,
-                    'email_mentor' => $email_mentor,
-                    'password_mentor' => $password_mentor,
-                    'latitude_mentor' => $latitude_mentor,
-                    'longitude_mentor' => $longitude_mentor,
-                    'alamat_mentor' => $alamat_mentor,
-                    'pekerjaan_mentor' => $pekerjaan_mentor,
-                    'bio_mentor' => $bio_mentor,
-                    'tentang_mentor' => $tentang_mentor,
-                );
             }
-
             $mentor_id = $ID; //ngambil ID si Mentor buat nambahin data yang baru
 
             $jenjang_pendidikan = $this->input->post('jenjang_pendidikan');
@@ -213,7 +217,7 @@ Class Mentor extends CI_Controller {
                     echo json_encode($resultPengalaman);
                 }
             }
-            
+
             $nama_kualifikasi = $this->input->post('nama_kualifikasi');
             if ($nama_kualifikasi != NULL) {
                 for ($i = 0; $i < count($nama_kualifikasi); $i++) {
@@ -242,7 +246,7 @@ Class Mentor extends CI_Controller {
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Mentor_Model->edit($ID, $data); //buat edit data utama dari mentor
                 echo json_encode($result);
-                redirect('/admin/mentor/edit/' . $ID);
+                redirect('/admin/homementor/view/' . $ID);
             }
         }
         $param['data'] = $this->Mentor_Model->getById($ID)->row_array(); //edit profil utama, edit data banyak nanti aja
@@ -254,6 +258,15 @@ Class Mentor extends CI_Controller {
         $this->load->view('include/header');
         $this->load->view('detail-mentor', $param);
         $this->load->view('include/footer');
+        //-------------UNTUK ANDROID -------------------------------------------
+        //ANDROID KIRIM REQUEST BUAT EDIT MENTOR
+        //1. KIRIM DATA MENTOR YANG SUDAH ADA KE ANDROID
+        //2. CARI CARANYA....
+        //3. DECODE DATA-DATA ANDROID
+        //4. MASUKIN KE DATABASE
+        //5. KIRIM RESPONSE KE ANDROID
+        //UNTUK DATA TAMBAHAN BISA DITAMBAHKAN SAAT DIEDIT(DATA ARRAY SESUAI DNGAN YANG ULWAN BUAT)
+        //----------------------------------------------------------------------
     }
 
     function delete($ID) {
@@ -262,6 +275,9 @@ Class Mentor extends CI_Controller {
         redirect('/admin/mentor');
     }
 
+    //---------------------UNTUK ANDROID-----------------------
+    //CARA DELETE TAMBAHAN-TAMBAHAN DARI MENTOR, LIAT DULU ULWAN CARANYA SPT APA.
+    //---------------------------------------------------------
     function deleteSejarah() {
         $IDMentor = $this->uri->segment(4);
         $IDPendidikan = $this->uri->segment(5);

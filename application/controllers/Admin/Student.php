@@ -7,7 +7,7 @@ Class Student extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Student_Model');
-        $this->load->library('form_validation');
+        $this->load->library('form_validation');//SAAT DIANDROID TIDAK DIGUNAKAN, UBAH/HAPUS BEBERAPA CODE INI
     }
 
     public function index() {
@@ -68,6 +68,12 @@ Class Student extends CI_Controller {
         $this->load->view('include/header');
         $this->load->view('detail-student');
         $this->load->view('include/footer');
+           //-------------UNTUK ANDROID -------------------------------------------
+        //ANDROID KIRIM REQUEST BUAT MENTOR BARU
+        //1. TERIMA DAN DECODE DATA-DATA ANDROID
+        //2. MASUKIN KE DATABASE
+        //3. KIRIM RESPONSE KE ANDROID
+        //----------------------------------------------------------------------
     }
 
     function edit($ID) {
@@ -94,7 +100,22 @@ Class Student extends CI_Controller {
             $latitude_siswa = $input['latitude_siswa'];
             $longitude_siswa = $input['longitude_siswa'];
             $alamat_siswa = $input['alamat_siswa'];
-            if ($_FILES["foto_mentor"]["tmp_name"] != "") { //jika foto berubah maka update kolom foto pada database mentor
+            if (file_get_contents($_FILES["foto_mentor"]["tmp_name"]) == NULL) {
+                $data = array(
+                    'nama_siswa' => $nama_siswa,
+                    'no_identitas_siswa' => $no_identitas_siswa,
+                    'jenis_kelamin_siswa' => $jenis_kelamin_siswa,
+                    'tempat_lahir_siswa' => $tempat_lahir_siswa,
+                    'tanggal_lahir_siswa' => $tanggal_lahir_siswa,
+                    'no_ponsel_siswa' => $no_ponsel_siswa,
+                    'sekolah_siswa' => $sekolah_siswa,
+                    'email_siswa' => $email_siswa,
+                    'password_siswa' => $password_siswa,
+                    'latitude_siswa' => $latitude_siswa,
+                    'longitude_siswa' => $longitude_siswa,
+                    'alamat_siswa' => $alamat_siswa,
+                );
+            } else {
                 $foto_siswa = file_get_contents($_FILES["foto_siswa"]["tmp_name"]);
                 $data = array(
                     'nama_siswa' => $nama_siswa,
@@ -111,24 +132,7 @@ Class Student extends CI_Controller {
                     'alamat_siswa' => $alamat_siswa,
                     'foto_siswa' => $foto_siswa
                 );
-            } else { //jika foto tidak berubah maka jangan update didatabase
-                $data = array(
-                    'nama_siswa' => $nama_siswa,
-                    'no_identitas_siswa' => $no_identitas_siswa,
-                    'jenis_kelamin_siswa' => $jenis_kelamin_siswa,
-                    'tempat_lahir_siswa' => $tempat_lahir_siswa,
-                    'tanggal_lahir_siswa' => $tanggal_lahir_siswa,
-                    'no_ponsel_siswa' => $no_ponsel_siswa,
-                    'sekolah_siswa' => $sekolah_siswa,
-                    'email_siswa' => $email_siswa,
-                    'password_siswa' => $password_siswa,
-                    'latitude_siswa' => $latitude_siswa,
-                    'longitude_siswa' => $longitude_siswa,
-                    'alamat_siswa' => $alamat_siswa,
-                );
             }
-
-
             if ($this->form_validation->run() == TRUE) {
                 $result = $this->Student_Model->edit($ID, $data);
                 echo json_encode($result);
@@ -139,6 +143,13 @@ Class Student extends CI_Controller {
         $this->load->view('include/header');
         $this->load->view('detail-student', $param);
         $this->load->view('include/footer');
+        //-------------UNTUK ANDROID -------------------------------------------
+        //ANDROID KIRIM REQUEST BUAT EDIT SISWA
+        //1. KIRIM DATA-DATA SISWA KE ANDROID SESUAI ID REQUEST
+        //2. TERIMA DAN DECODE DATA-DATA ANDROID
+        //3. MASUKIN KE DATABASE
+        //4. KIRIM RESPONSE KE ANDROID
+        //----------------------------------------------------------------------
     }
 
     function delete($ID) {

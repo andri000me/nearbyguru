@@ -21,6 +21,24 @@ Class HomeSiswa extends CI_Controller {
 //        $this->load->view('include/footer');
 //
 //    }
+//    public function login($json) {
+//        $data = json_decode($json);
+//        $ID = $this->Student_Model->login($data)->row_array();
+//         if($ID != NULL){
+//            //ambil ID dan panggil method view dengan ID yang didapakan
+//             $response["success"] = 1;
+//             $response["message"] = 'Login Sukses';
+//             echo json_encode($response);
+//            $this->view($ID);
+//        }
+//        else{
+//            //return response error ke android
+//            $response["success"] = 0;
+//            $response["message"] = 'Login Gagal';
+//            echo json_encode($response);
+//        }
+//    }
+    
     public function view($ID) {
          $param['asal'] = "coba";
         $param['data'] = $this->Student_Model->getById($ID)->row_array();//ambil data profil utama
@@ -30,6 +48,12 @@ Class HomeSiswa extends CI_Controller {
         $this->load->view('include/header', $param);
         $this->load->view('homesiswa', $param);
         $this->load->view('include/footer');
+        //--------UNTUK ANDROID-------------------------------------------------
+        //ambil id
+        //ambil data profil dari database, KIRIM ke android
+        //ambil data  kelas dari database, KIRIM ke android
+        //kirim response ke android
+        //----------------------------------------------------------------------
     }
 }
 ?>

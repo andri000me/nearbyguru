@@ -1,7 +1,5 @@
 <?php
 
-//validasi belum dikerjakan
-
 Class Harga extends CI_Controller {
 
     public function __construct() {
@@ -22,9 +20,9 @@ Class Harga extends CI_Controller {
 
     function input() {
         if ($input = $this->input->post()) {
-        $this->form_validation->set_rules('id_mentor', 'ID Mentor', 'required');
-        $this->form_validation->set_rules('id_mapel', 'ID Mata Pelajaran', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
+            $this->form_validation->set_rules('id_mentor', 'ID Mentor', 'required');
+            $this->form_validation->set_rules('id_mapel', 'ID Mata Pelajaran', 'required');
+            $this->form_validation->set_rules('harga', 'Harga', 'required');
             $id_mentor = $input['id_mentor'];
             $id_mapel = $input['id_mapel'];
             $harga = $input['harga'];
@@ -34,9 +32,9 @@ Class Harga extends CI_Controller {
                 'harga' => $harga,
             );
             if ($this->form_validation->run() == TRUE) {
-            $result = $this->Harga_Model->insert($data);
-            echo json_encode($result);
-            redirect('/admin/harga');
+                $result = $this->Harga_Model->insert($data);
+                echo json_encode($result);
+                redirect('/admin/harga');
             }
         }
         $this->load->view('include/header');
@@ -55,7 +53,7 @@ Class Harga extends CI_Controller {
                 'harga' => $harga,
             );
 
-            $result= $this->Harga_Model->edit($ID,$data);
+            $result = $this->Harga_Model->edit($ID, $data);
             echo json_encode($result);
             redirect('/admin/harga');
         }
@@ -69,5 +67,6 @@ Class Harga extends CI_Controller {
         $this->Harga_Model->delete($ID);
         redirect('/admin/harga');
     }
+
 
 }
